@@ -80,6 +80,7 @@
     <Compile Include="Calculator.cs" />
     <Compile Include="MessageGenerator.cs" />
     <Compile Include="web\application\Product.cs" />
+    <Compile Include="web\application\ViewAReportModel.cs" />
     <Compile Include="web\application\ViewTheProductsOfADepartment.cs" />
     <Compile Include="web\application\Department.cs" />
     <Compile Include="web\application\IFindInformationInTheStore.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="web\core\IProcessOneRequest.cs" />
     <Compile Include="web\core\IProcessRequests.cs" />
     <Compile Include="web\core\IMatchARequest.cs" />
+    <Compile Include="web\core\IQueryReportModels.cs" />
     <Compile Include="web\core\RequestCommand.cs" />
     <Compile Include="web\core\stubs\StubMissingCommand.cs" />
     <Compile Include="web\core\stubs\StubRequestFactory.cs" />
