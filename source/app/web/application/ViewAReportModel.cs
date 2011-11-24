@@ -2,12 +2,12 @@
 
 namespace app.web.application
 {
-    public class ViewAReportModel : IImplementAUseCase
+    public class ViewAReportModel<ReportModel> : IImplementAUseCase
     {
-        IQueryReportModels query_engine;
+        IQueryReportModels<ReportModel> query_engine;
         IDisplayReportModels response_engine;
 
-        public ViewAReportModel(IQueryReportModels query_engine, IDisplayReportModels response_engine)
+        public ViewAReportModel(IQueryReportModels<ReportModel> query_engine, IDisplayReportModels response_engine)
         {
             this.query_engine = query_engine;
             this.response_engine = response_engine;

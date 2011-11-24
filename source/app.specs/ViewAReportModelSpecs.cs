@@ -6,11 +6,11 @@ using developwithpassion.specifications.rhinomocks;
 
 namespace app.specs
 {
-    [Subject(typeof(ViewAReportModel))]
+    [Subject(typeof(ViewAReportModel<>))]
     public class ViewAReportModelSpecs
     {
         public abstract class concern : Observes<IImplementAUseCase,
-                                          ViewAReportModel>
+                                          ViewAReportModel<TestReportModel>>
         {
         }
 
@@ -19,10 +19,10 @@ namespace app.specs
             Establish c = () =>
                 {
                     request = fake.an<IContainRequestInformation>();
-                    report_model = new object();
+                    report_model = new TestReportModel();
 
                     response_engine = depends.on<IDisplayReportModels>();
-                    query_engine = depends.on<IQueryReportModels>();
+                    query_engine = depends.on<IQueryReportModels<TestReportModel>>();
                     query_engine.setup(x => x.query_for_report_model(request)).Return(report_model);
                 };
 
@@ -35,10 +35,14 @@ namespace app.specs
             It should_display_the_report_model = () =>
               response_engine.received(x => x.display(report_model));
 
-            static IQueryReportModels query_engine;
+            static IQueryReportModels<TestReportModel> query_engine;
             static IContainRequestInformation request;
             static IDisplayReportModels response_engine;
-            static object report_model;
+            static TestReportModel report_model;
+        }
+
+        public class TestReportModel
+        {
         }
     }
 }

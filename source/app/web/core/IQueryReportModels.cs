@@ -1,7 +1,7 @@
 ﻿namespace app.web.core
 {
-    public interface IQueryReportModels
+    public interface IQueryReportModels<ReportModel>
     {
-        object query_for_report_model(IContainRequestInformation request);
+        ReportModel query_for_report_model(IContainRequestInformation request);
     }
 }
