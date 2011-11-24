@@ -99,7 +99,6 @@
     <Compile Include="web\core\IContainRequestInformation.cs" />
     <Compile Include="web\core\aspnet\ICreateAResponse.cs" />
     <Compile Include="web\core\IDisplayReportModels.cs" />
-    <Compile Include="web\core\ISendAResponse.cs" />
     <Compile Include="web\core\ICreateRequests.cs" />
     <Compile Include="web\core\IFindCommands.cs" />
     <Compile Include="web\core\IRunQuery.cs" />
