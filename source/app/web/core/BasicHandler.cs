@@ -11,7 +11,6 @@ namespace app.web.core
     public BasicHandler()
       : this(
         Container.fetch.an<IProcessRequests>(), Container.fetch.an<ICreateRequests>())
-      )
     {
     }
 
