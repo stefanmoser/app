@@ -29,6 +29,7 @@ namespace app.specs
         {
           the_factory = fake.an<ICreateADependency>();
           dependencies = new Dictionary<Type, ICreateADependency>();
+
           depends.on(dependencies);
           dependencies.Add(typeof(OurType), the_factory);
         };
