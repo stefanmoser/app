@@ -4,7 +4,7 @@ namespace app.utility.containers.basic
 {
   public class DependencyCreationException : Exception
   {
-    public DependencyCreationException(Type bad_type, Exception e) : base(string.Empty, e)
+    public DependencyCreationException(Type bad_type, Exception e) : base(bad_type.Name, e)
     {
       this.type_that_could_not_be_created = bad_type;
     }
