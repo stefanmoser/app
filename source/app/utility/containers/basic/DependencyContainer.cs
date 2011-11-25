@@ -23,5 +23,10 @@ namespace app.utility.containers.basic
         throw new DependencyCreationException(typeof(Dependency), e);
       }
     }
+
+    public object an(Type type)
+    {
+      throw new NotImplementedException();
+    }
   }
 }

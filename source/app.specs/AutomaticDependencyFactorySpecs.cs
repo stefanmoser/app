@@ -46,14 +46,13 @@ namespace app.specs
 
       It should_return_the_instance_with_all_dependencies_populated = () =>
       {
-        var item = result.ShouldBeAn<OurTypeWithDependencies>()
-        item.command.ShouldEqual(the_command);
+        var item = result.ShouldBeAn<OurTypeWithDependencies>();
+        item.command.ShouldEqual(command);
         item.connection.ShouldEqual(connection);
         item.reader.ShouldEqual(reader);
       };
 
       static object result;
-      static IDbCommand the_command;
       static IDbConnection connection;
       static IDataReader reader;
       static IFetchDependencies container;
