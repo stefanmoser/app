@@ -8,7 +8,7 @@ using developwithpassion.specifications.rhinomocks;
 
 namespace app.specs
 {
-  [Subject(typeof(ViewReport<>))]
+  [Subject(typeof(ViewReport<,>))]
   public class ViewReportSpecs
   {
     public abstract class concern : Observes<ViewReport<IEnumerable<Department>,OurQuery>>
