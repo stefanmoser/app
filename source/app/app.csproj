@@ -83,8 +83,10 @@
     <Compile Include="tasks\startup\ConfigureTheFrontController.cs" />
     <Compile Include="tasks\startup\ConfiguringTheContainer.cs" />
     <Compile Include="tasks\startup\ConfigureTheServiceLayer.cs" />
+    <Compile Include="tasks\startup\IBuildStartUpSteps.cs" />
     <Compile Include="tasks\startup\IProvideContainerRegistrationServices.cs" />
     <Compile Include="tasks\startup\IRunAStartupStep.cs" />
+    <Compile Include="tasks\startup\Start.cs" />
     <Compile Include="tasks\startup\Startup.cs" />
     <Compile Include="utility\containers\basic\AutomaticDependencyFactory.cs" />
     <Compile Include="utility\containers\basic\DependencyContainer.cs" />
