@@ -121,7 +121,6 @@
     <Compile Include="web\core\IProcessOneRequest.cs" />
     <Compile Include="web\core\IProcessRequests.cs" />
     <Compile Include="web\core\ContainsModel.cs" />
-    <Compile Include="web\core\MatchBuilderFactory.cs" />
     <Compile Include="web\core\RequestCommand.cs" />
     <Compile Include="web\core\aspnet\WebResponseEngine.cs" />
     <Compile Include="web\core\RequestMatchBuilder.cs" />

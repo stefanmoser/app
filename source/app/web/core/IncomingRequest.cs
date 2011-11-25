@@ -6,7 +6,7 @@ namespace app.web.core
   {
     public static IBuildRequestMatchers was
     {
-      get { return Container.fetch.an<MatchBuilderFactory>().Invoke(); }
+      get { return Container.fetch.an<IBuildRequestMatchers>(); }
     }
   }
 }

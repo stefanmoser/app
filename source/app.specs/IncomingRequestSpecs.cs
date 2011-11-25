@@ -20,13 +20,12 @@ namespace app.specs
       Establish c = () =>
       {
         the_builder = fake.an<IBuildRequestMatchers>();
-        MatchBuilderFactory factory = () => the_builder;
         the_facade = fake.an<IFetchDependencies>();
         ContainerFacadeResolution resolution = () => the_facade;
 
         spec.change(() => Container.facade_resolution).to(resolution);
 
-        the_facade.setup( x => x.an<MatchBuilderFactory>()).Return(factory);
+        the_facade.setup( x => x.an<IBuildRequestMatchers>()).Return(the_builder);
       };
 
       Because b = () =>

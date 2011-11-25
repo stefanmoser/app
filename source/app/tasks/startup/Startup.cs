@@ -29,8 +29,6 @@ namespace app.tasks.startup
     {
       dependencies.Add(typeof(IBuildRequestMatchers), new SimpleFactory(() => new RequestMatchBuilder()));
 
-      dependencies.Add(typeof(MatchBuilderFactory),
-                       new SimpleFactory(() => (MatchBuilderFactory) Container.fetch.an<IBuildRequestMatchers>));
 
       dependencies.Add(typeof(IFindPathsToViews), new SimpleFactory(Stub.with<StubPathRegistry>));
 
