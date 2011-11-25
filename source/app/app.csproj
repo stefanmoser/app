@@ -127,10 +127,11 @@
     <Compile Include="web\core\RequestCommand.cs" />
     <Compile Include="web\core\aspnet\WebResponseEngine.cs" />
     <Compile Include="web\core\RequestMatchBuilder.cs" />
+    <Compile Include="web\core\stubs\GetDepartmentsInDepartment.cs" />
     <Compile Include="web\core\stubs\GetProductsInADepartment.cs" />
+    <Compile Include="web\core\stubs\GetTheMainDepartments.cs" />
     <Compile Include="web\core\stubs\StubMissingCommand.cs" />
     <Compile Include="web\core\stubs\StubRequestFactory.cs" />
-    <Compile Include="web\core\stubs\StubSetOfCommands.cs" />
     <Compile Include="web\core\stubs\TestStub.cs" />
     <Compile Include="web\core\stubs\ViewDepartmentsInDepartmentRequest.cs" />
     <Compile Include="web\core\stubs\ViewMainDepartmentsRequest.cs" />

@@ -2,12 +2,12 @@
 
 namespace app.web.application
 {
-  public class ViewReport<TResponse> : IImplementAUseCase
+  public class ViewReport<TResponse,Query> : IImplementAUseCase where Query : IRunQuery<TResponse>
   {
-    IRunQuery<TResponse> query;
+    Query query;
     IDisplayReportModels response_gateway;
 
-    public ViewReport(IRunQuery<TResponse> query, IDisplayReportModels response_gateway)
+    public ViewReport(Query query, IDisplayReportModels response_gateway)
     {
       this.query = query;
       this.response_gateway = response_gateway;

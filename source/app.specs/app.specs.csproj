@@ -117,7 +117,7 @@
     <Compile Include="BasicHandlerSpecs.cs" />
     <Compile Include="CalculatorSpecs.cs" />
     <Compile Include="CommandRegistrySpecs.cs" />
-    <Compile Include="CommandExecutorSpecs.cs" />
+    <Compile Include="ViewReportSpecs.cs" />
     <Compile Include="ContainerSpecs.cs" />
     <Compile Include="DependencyContainerSpecs.cs" />
     <Compile Include="GreedyConstructorSelectionStrategySpecs.cs" />

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Machine.Specifications;
 using app.web.application;
 using app.web.core;
@@ -8,9 +9,9 @@ using developwithpassion.specifications.rhinomocks;
 namespace app.specs
 {
   [Subject(typeof(ViewReport<>))]
-  public class CommandExecutorSpecs
+  public class ViewReportSpecs
   {
-    public abstract class concern : Observes<ViewReport<IEnumerable<Department>>>
+    public abstract class concern : Observes<ViewReport<IEnumerable<Department>,OurQuery>>
     {
     }
 
@@ -21,7 +22,7 @@ namespace app.specs
         request = fake.an<IContainRequestInformation>();
         parent_department = fake.an<Department>();
         departments = new List<Department> {new Department()};
-        query = depends.on<IRunQuery<IEnumerable<Department>>>();
+        query = depends.on<OurQuery>();
         response_engine = depends.on<IDisplayReportModels>();
 
         request.setup(x => x.map<Department>()).Return(parent_department);
@@ -35,11 +36,19 @@ namespace app.specs
       It should_display_the_report_model = () =>
         response_engine.received(x => x.display(departments));
 
-      static IRunQuery<IEnumerable<Department>> query;
+      static OurQuery query;
       static IContainRequestInformation request;
       static IDisplayReportModels response_engine;
       static IEnumerable<Department> departments;
       static Department parent_department;
+    }
+  }
+
+  public class OurQuery :IRunQuery<IEnumerable<Department>>
+  {
+    public virtual IEnumerable<Department> run_using(IContainRequestInformation request)
+    {
+      throw new NotImplementedException();
     }
   }
 }

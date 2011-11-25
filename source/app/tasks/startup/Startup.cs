@@ -22,29 +22,39 @@ namespace app.tasks.startup
       container = new DependencyContainer(dependencies);
       ContainerFacadeResolution facade_resolution = () => container;
       Container.facade_resolution = facade_resolution;
-
+      
       wire_everything_up();
     }
 
     static void wire_everything_up()
     {
+      register_instance(container);
+      register<GetDepartmentsInDepartment>();
+      register<GetProductsInADepartment>();
+      register<GetTheMainDepartments>();
       register<IBuildRequestMatchers, RequestMatchBuilder>();
       register<IFindPathsToViews, StubPathRegistry>();
-
-      register<ICreateAResponse>(()=>new PageFactory(Container.fetch.an<IFindPathsToViews>(), BuildManager.CreateInstanceFromVirtualPath));
-      register<IDisplayReportModels>(() => new WebResponseEngine(Container.fetch.an<ICreateAResponse>(), () => HttpContext.Current));
-      register<IFindCommands>(() => new CommandRegistry(Stub.with<StubSetOfCommands>(), Stub.with<StubMissingCommand>()));
-      register<ICreateRequests>(Stub.with<StubRequestFactory>);
-      register<IProcessRequests>(() => new FrontController(Container.fetch.an<IFindCommands>()));
+      register<IDisplayReportModels, WebResponseEngine>();
+      register<IFindCommands, CommandRegistry>();
+      register<ICreateRequests, StubRequestFactory>();
+      register<IProcessRequests, FrontController>();
+      register<ICreateAResponse,PageFactory>();
+      register<IFindPathsToViews,StubPathRegistry>();
+      register_instance<CurrentContextResolver>(() => HttpContext.Current);
+      register_instance<TemplateFactory>(BuildManager.CreateInstanceFromVirtualPath);
     }
 
-    static void register<Contract,Implementation>()
+    static void register<Implementation>() 
+    {
+      register<Implementation,Implementation>();
+    }
+    static void register<Contract,Implementation>() where Implementation : Contract
     {
       dependencies.Add(typeof(Contract), new AutomaticDependencyFactory(container, new GreedyConstructorSelectionStrategy(),typeof(Implementation)));
     }
-    static void register<RegisteredType>(Func<object> factory_method)
+    static void register_instance<RegisteredType>(RegisteredType item)
     {
-      dependencies.Add(typeof(RegisteredType), new SimpleFactory(factory_method));
+      dependencies.Add(typeof(RegisteredType), new SimpleFactory(() => item));
     }
   }
 }
