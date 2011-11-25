@@ -1,4 +1,5 @@
-﻿using Machine.Specifications;
+﻿using System;
+using Machine.Specifications;
 using app.utility.containers;
 using app.utility.containers.basic;
 using developwithpassion.specifications.rhinomocks;
@@ -16,19 +17,64 @@ namespace app.specs
 
     public class when_fetching_a_dependency : concern
     {
-      Establish c = () =>
+      public class and_everything_is_all_good
       {
-        dependencies = depends.on<IMapDependencies>();
-      };
-      Because b = () =>
-        sut.an<ThatsWhatSheSaid>();
+        Establish c = () =>
+        {
+          the_item = new ThatsWhatSheSaid();
+          factory = fake.an<ICreateADependency>();
+          dependencies = depends.on<IFindFactoriesForDependencies>();
+          dependencies.setup(x => x.get_the_factory_that_can_create(typeof(ThatsWhatSheSaid))).Return(factory);
 
-      It should_lookup_the_dependency_in_the_dependency_registry = () =>
-        dependencies.received(x => x.map<ThatsWhatSheSaid>());
+          factory.setup(x => x.create()).Return(the_item);
+        };
 
-      static IMapDependencies dependencies;
+        Because b = () =>
+          result = sut.an<ThatsWhatSheSaid>();
+
+        It should_find_the_factory_that_can_create_the_dependency = () =>
+        {
+        };
+
+        It should_return_the_item_created_by_the_factory = () =>
+          result.ShouldEqual(the_item);
 
 
+
+
+      }
+
+      public class and_the_factory_for_the_dependency_throws_an_exception_when_creating_the_item
+      {
+        Establish c = () =>
+        {
+          the_item = new ThatsWhatSheSaid();
+          factory = fake.an<ICreateADependency>();
+          the_inner_exception = new Exception();
+          dependencies = depends.on<IFindFactoriesForDependencies>();
+          dependencies.setup(x => x.get_the_factory_that_can_create(typeof(ThatsWhatSheSaid))).Return(factory);
+
+          factory.setup(x => x.create()).Throw(the_inner_exception);
+        };
+
+        Because b = () =>
+          spec.catch_exception(() => sut.an<ThatsWhatSheSaid>());
+
+
+        It should_throw_a_dependency_creation_exception_with_the_necessary_information = () =>
+        {
+          var item = spec.exception_thrown.ShouldBeAn<DependencyCreationException>();
+          item.type_that_could_not_be_created.ShouldEqual(typeof(ThatsWhatSheSaid));
+          item.InnerException.ShouldEqual(the_inner_exception);
+        };
+
+        static Exception the_inner_exception;
+
+      }
+      static IFindFactoriesForDependencies dependencies;
+      static ICreateADependency factory;
+      static ThatsWhatSheSaid result;
+      static ThatsWhatSheSaid the_item;
     }
   }
 
