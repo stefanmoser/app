@@ -14,19 +14,19 @@ namespace app.utility.containers.basic
 
     public Dependency an<Dependency>()
     {
-      try
-      {
-        return (Dependency) dependencies[typeof(Dependency)].create();
-      }
-      catch (Exception e)
-      {
-        throw new DependencyCreationException(typeof(Dependency), e);
-      }
+      return (Dependency)an(typeof(Dependency));
     }
 
     public object an(Type type)
     {
-      throw new NotImplementedException();
+      try
+      {
+        return dependencies[type].create();
+      }
+      catch (Exception e)
+      {
+        throw new DependencyCreationException(type, e);
+      }
     }
   }
 }

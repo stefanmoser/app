@@ -18,6 +18,30 @@ namespace app.specs
 
     public class when_fetching_a_dependency : concern
     {
+      public class by_type_and_everything_is_all_good
+      {
+        Establish c = () =>
+        {
+          the_item = new ThatsWhatSheSaid();
+          factory = fake.an<ICreateADependency>();
+          dependencies = new Dictionary<Type, ICreateADependency>();
+          dependencies.Add(typeof(ThatsWhatSheSaid),factory);
+          depends.on(dependencies);
+
+          factory.setup(x => x.create()).Return(the_item);
+        };
+
+        Because b = () =>
+          result = sut.an(typeof(ThatsWhatSheSaid));
+
+
+        It should_return_the_item_created_by_the_factory = () =>
+          result.ShouldEqual(the_item);
+
+
+
+
+      }
       public class and_everything_is_all_good
       {
         Establish c = () =>
@@ -76,7 +100,7 @@ namespace app.specs
       }
       static IDictionary<Type, ICreateADependency> dependencies;
       static ICreateADependency factory;
-      static ThatsWhatSheSaid result;
+      static object result;
       static ThatsWhatSheSaid the_item;
     }
   }
