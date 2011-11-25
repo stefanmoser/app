@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using app.utility.containers.basic;
+﻿using app.utility.containers.basic;
 
 namespace app.tasks.startup
 {
-  public interface IProvideContainerRegistrationServices : IDictionary<Type,ICreateADependency>
+  public interface IProvideContainerRegistrationServices : IFindFactoriesForDependencies
   {
     void register<Implementation>();
     void register<Contract, Implementation>() where Implementation : Contract;

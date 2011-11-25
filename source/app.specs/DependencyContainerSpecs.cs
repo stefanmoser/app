@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using Machine.Specifications;
 using app.utility.containers;
 using app.utility.containers.basic;
-using developwithpassion.specifications.rhinomocks;
 using developwithpassion.specifications.extensions;
+using developwithpassion.specifications.rhinomocks;
 
 namespace app.specs
 {
@@ -24,9 +23,9 @@ namespace app.specs
         {
           the_item = new ThatsWhatSheSaid();
           factory = fake.an<ICreateADependency>();
-          dependencies = new Dictionary<Type, ICreateADependency>();
-          dependencies.Add(typeof(ThatsWhatSheSaid),factory);
-          depends.on(dependencies);
+          dependencies = depends.on<IFindFactoriesForDependencies>();
+          dependencies.setup(x => x.get_the_factory_that_can_create(typeof(ThatsWhatSheSaid)))
+            .Return(factory);
 
           factory.setup(x => x.create()).Return(the_item);
         };
@@ -34,24 +33,18 @@ namespace app.specs
         Because b = () =>
           result = sut.an(typeof(ThatsWhatSheSaid));
 
-
         It should_return_the_item_created_by_the_factory = () =>
           result.ShouldEqual(the_item);
-
-
-
-
       }
+
       public class and_everything_is_all_good
       {
         Establish c = () =>
         {
           the_item = new ThatsWhatSheSaid();
           factory = fake.an<ICreateADependency>();
-          dependencies = new Dictionary<Type, ICreateADependency>();
-          dependencies.Add(typeof(ThatsWhatSheSaid),factory);
-          depends.on(dependencies);
-
+          dependencies = depends.on<IFindFactoriesForDependencies>();
+          dependencies.setup(x => x.get_the_factory_that_can_create(typeof(ThatsWhatSheSaid))).Return(factory);
           factory.setup(x => x.create()).Return(the_item);
         };
 
@@ -64,10 +57,6 @@ namespace app.specs
 
         It should_return_the_item_created_by_the_factory = () =>
           result.ShouldEqual(the_item);
-
-
-
-
       }
 
       public class and_the_factory_for_the_dependency_throws_an_exception_when_creating_the_item
@@ -77,16 +66,15 @@ namespace app.specs
           the_item = new ThatsWhatSheSaid();
           factory = fake.an<ICreateADependency>();
           the_inner_exception = new Exception();
-          dependencies = new Dictionary<Type, ICreateADependency>();
-          dependencies.Add(typeof(ThatsWhatSheSaid),factory);
-          depends.on(dependencies);
+          dependencies = depends.on<IFindFactoriesForDependencies>();
+
+          dependencies.setup(x => x.get_the_factory_that_can_create(typeof(ThatsWhatSheSaid))).Return(factory);
 
           factory.setup(x => x.create()).Throw(the_inner_exception);
         };
 
         Because b = () =>
           spec.catch_exception(() => sut.an<ThatsWhatSheSaid>());
-
 
         It should_throw_a_dependency_creation_exception_with_the_necessary_information = () =>
         {
@@ -96,9 +84,9 @@ namespace app.specs
         };
 
         static Exception the_inner_exception;
-
       }
-      static IDictionary<Type, ICreateADependency> dependencies;
+
+      static IFindFactoriesForDependencies dependencies;
       static ICreateADependency factory;
       static object result;
       static ThatsWhatSheSaid the_item;
