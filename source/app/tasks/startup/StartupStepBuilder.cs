@@ -5,7 +5,7 @@ namespace app.tasks.startup
 {
 	public class StartupStepBuilder : IBuildStartupPipelines
 	{
-		IList<Type> _steps;
+		List<Type> _steps;
 		public IList<Type> steps
 		{
 			get { return _steps; }
@@ -16,7 +16,7 @@ namespace app.tasks.startup
 		{
 		}
 
-		StartupStepBuilder(Type StartupTypeToRun, IList<Type> types)
+		StartupStepBuilder(Type StartupTypeToRun, List<Type> types)
 		{
 			_steps = types;
 			_steps.Add(StartupTypeToRun);
