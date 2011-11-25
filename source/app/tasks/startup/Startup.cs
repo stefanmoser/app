@@ -14,11 +14,12 @@ namespace app.tasks.startup
   public class Startup
   {
     static IDictionary<Type, ICreateADependency> dependencies;
+    static IFetchDependencies container;
 
     public static void run()
     {
       dependencies = new Dictionary<Type, ICreateADependency>();
-      IFetchDependencies container = new DependencyContainer(dependencies);
+      container = new DependencyContainer(dependencies);
       ContainerFacadeResolution facade_resolution = () => container;
       Container.facade_resolution = facade_resolution;
 
@@ -27,8 +28,9 @@ namespace app.tasks.startup
 
     static void wire_everything_up()
     {
-      register<IBuildRequestMatchers>(() => new RequestMatchBuilder());
-      register<IFindPathsToViews>(Stub.with<StubPathRegistry>);
+      register<IBuildRequestMatchers, RequestMatchBuilder>();
+      register<IFindPathsToViews, StubPathRegistry>();
+
       register<ICreateAResponse>(()=>new PageFactory(Container.fetch.an<IFindPathsToViews>(), BuildManager.CreateInstanceFromVirtualPath));
       register<IDisplayReportModels>(() => new WebResponseEngine(Container.fetch.an<ICreateAResponse>(), () => HttpContext.Current));
       register<IFindCommands>(() => new CommandRegistry(Stub.with<StubSetOfCommands>(), Stub.with<StubMissingCommand>()));
@@ -36,6 +38,10 @@ namespace app.tasks.startup
       register<IProcessRequests>(() => new FrontController(Container.fetch.an<IFindCommands>()));
     }
 
+    static void register<Contract,Implementation>()
+    {
+      dependencies.Add(typeof(Contract), new AutomaticDependencyFactory(container, new GreedyConstructorSelectionStrategy()));
+    }
     static void register<RegisteredType>(Func<object> factory_method)
     {
       dependencies.Add(typeof(RegisteredType), new SimpleFactory(factory_method));

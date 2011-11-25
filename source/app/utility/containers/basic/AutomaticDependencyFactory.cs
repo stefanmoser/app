@@ -1,31 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace app.utility.containers.basic
 {
   public class AutomaticDependencyFactory : ICreateADependency
   {
-	  readonly IFetchDependencies fetcher;
-	  readonly IPickTheConstructorForAType picker;
-	  readonly Type type;
+    IFetchDependencies fetcher;
+    IPickTheConstructorForAType picker;
+    Type type;
 
-	  public AutomaticDependencyFactory(IFetchDependencies fetcher, IPickTheConstructorForAType picker, Type type)
-	  {
-		  this.fetcher = fetcher;
-		  this.picker = picker;
-		  this.type = type;
-	  }
+    public AutomaticDependencyFactory(IFetchDependencies fetcher, IPickTheConstructorForAType picker, Type type)
+    {
+      this.fetcher = fetcher;
+      this.picker = picker;
+      this.type = type;
+    }
 
-	  public object create()
-	  {
-		  var constructor_info = picker.get_applicable_constructor_on(type);
-		  var parameters = new List<object>();
-
-		  foreach (var required_param in constructor_info.GetParameters())
-		  {
-			  parameters.Add(fetcher.an(required_param.ParameterType));
-		  }
-		  return Activator.CreateInstance(this.type, parameters.ToArray());
-	  }
+    public object create()
+    {
+      var ctor = picker.get_applicable_constructor_on(type);
+      var args = ctor.GetParameters().Select(x => x.ParameterType)
+        .Select(x => fetcher.an(x));
+      return ctor.Invoke(args.ToArray());
+    }
   }
 }
