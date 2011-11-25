@@ -25,8 +25,9 @@ namespace app.tasks.startup
 		{
 			register_container();
 			register_service_layer();
-			register_net_layer();
 			register_command_layer();
+			register_net_layer();
+			
 		}
 
 		static void register_container()
@@ -36,6 +37,13 @@ namespace app.tasks.startup
 			ContainerFacadeResolution facade_resolution = () => container;
 			Container.facade_resolution = facade_resolution;
 			register_instance(container);
+		}
+
+		static void register_service_layer()
+		{
+			register<GetDepartmentsInDepartment>();
+			register<GetProductsInADepartment>();
+			register<GetTheMainDepartments>();
 		}
 
 		static void register_command_layer()
@@ -54,14 +62,6 @@ namespace app.tasks.startup
 			register_instance<TemplateFactory>(BuildManager.CreateInstanceFromVirtualPath);
 			register<IDisplayReportModels, WebResponseEngine>();
 		}
-
-		static void register_service_layer()
-		{
-			register<GetDepartmentsInDepartment>();
-			register<GetProductsInADepartment>();
-			register<GetTheMainDepartments>();
-		}
-
 
 
 		static void register<Implementation>()
