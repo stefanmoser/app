@@ -40,7 +40,7 @@ namespace app.tasks.startup
 
     static void register<Contract,Implementation>()
     {
-      dependencies.Add(typeof(Contract), new AutomaticDependencyFactory(container, new GreedyConstructorSelectionStrategy()));
+      dependencies.Add(typeof(Contract), new AutomaticDependencyFactory(container, new GreedyConstructorSelectionStrategy(),typeof(Implementation)));
     }
     static void register<RegisteredType>(Func<object> factory_method)
     {
