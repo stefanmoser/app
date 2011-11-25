@@ -1,5 +1,5 @@
 ﻿using System.Web;
-using app.web.core.stubs;
+using app.utility.containers;
 
 namespace app.web.core
 {
@@ -8,8 +8,7 @@ namespace app.web.core
     IProcessRequests front_controller;
     ICreateRequests request_factory;
 
-	public BasicHandler()
-		: this(new FrontController(), Stub.with<StubRequestFactory>())
+    public BasicHandler():this(Container.fetch.an<IProcessRequests>())
     {
     }
 

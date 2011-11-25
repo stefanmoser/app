@@ -4,14 +4,12 @@
   {
     IFindCommands command_registry;
 
+
     public FrontController(IFindCommands registry)
     {
       this.command_registry = registry;
     }
 
-    public FrontController():this(new CommandRegistry())
-    {
-    }
 
     public void process(IContainRequestInformation a_request)
     {

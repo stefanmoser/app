@@ -1,5 +1,4 @@
 ﻿using app.web.core;
-using app.web.core.aspnet;
 
 namespace app.web.application
 {
@@ -12,11 +11,6 @@ namespace app.web.application
     {
       this.query = query;
       this.response_gateway = response_gateway;
-    }
-
-    public ViewReport(IRunQuery<TResponse> query)
-      : this(query, new WebResponseEngine())
-    {
     }
 
     public void process(IContainRequestInformation request)

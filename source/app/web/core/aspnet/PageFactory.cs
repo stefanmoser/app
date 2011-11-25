@@ -1,6 +1,4 @@
 ﻿using System.Web;
-using System.Web.Compilation;
-using app.web.core.aspnet.stubs;
 
 namespace app.web.core.aspnet
 {
@@ -13,10 +11,6 @@ namespace app.web.core.aspnet
     {
       this.page_path_registry = page_path_registry;
       this.template_factory = template_factory;
-    }
-
-    public PageFactory():this(Stub.with<StubPathRegistry>(),BuildManager.CreateInstanceFromVirtualPath)
-    {
     }
 
     public IHttpHandler create_using<ReportModel>(ReportModel model)

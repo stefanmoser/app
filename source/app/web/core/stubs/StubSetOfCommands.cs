@@ -14,9 +14,16 @@ namespace app.web.core.stubs
 
     public IEnumerator<IProcessOneRequest> GetEnumerator()
     {
-      yield return new RequestCommand(IncomingRequest.was.made_for<ViewMainDepartmentsRequest>(), new ViewReport<IEnumerable<Department>>(new GetTheMainDepartments()));
-      yield return new RequestCommand(IncomingRequest.was.made_for<ViewDepartmentsInDepartmentRequest>(), new ViewReport<IEnumerable<Department>>(new GetDepartmentsInDepartment()));
-      yield return new RequestCommand(IncomingRequest.was.made_for<ViewProductsRequest>(), new ViewReport<IEnumerable<Product>>(new GetProductsInADepartment()));
+//      yield return
+//        new RequestCommand(IncomingRequest.was.made_for<ViewMainDepartmentsRequest>(),
+//                           new ViewReport<IEnumerable<Department>>(new GetTheMainDepartments()));
+//      yield return
+//        new RequestCommand(IncomingRequest.was.made_for<ViewDepartmentsInDepartmentRequest>(),
+//                           new ViewReport<IEnumerable<Department>>(new GetDepartmentsInDepartment()));
+//      yield return
+//        new RequestCommand(IncomingRequest.was.made_for<ViewProductsRequest>(),
+//                           new ViewReport<IEnumerable<Product>>(new GetProductsInADepartment()));
+      yield break;
     }
   }
 

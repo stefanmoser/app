@@ -2,6 +2,6 @@
 {
   public interface IBuildRequestMatchers
   {
-    ContainsTheModel made_for<T>();
+    RequestMatch made_for<T>();
   }
 }

@@ -2,7 +2,7 @@
 {
   public class RequestMatchBuilder : IBuildRequestMatchers
   {
-    public ContainsTheModel made_for<Request>()
+    public RequestMatch made_for<Request>()
     {
       return x => x.request_name == typeof(Request).Name;
     }

@@ -17,7 +17,7 @@ namespace app.specs
       Establish c = () =>
       {
         request = fake.an<IContainRequestInformation>();
-        depends.on<ContainsTheModel>(x => true);
+        depends.on<RequestMatch>(x => true);
       };
 
       Because b = () =>

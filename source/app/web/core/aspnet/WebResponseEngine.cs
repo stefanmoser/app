@@ -1,5 +1,3 @@
-using System.Web;
-
 namespace app.web.core.aspnet
 {
   public class WebResponseEngine : IDisplayReportModels
@@ -11,10 +9,6 @@ namespace app.web.core.aspnet
     {
       this.response_factory = response_factory;
       this.current_context = current_context;
-    }
-
-    public WebResponseEngine():this(new PageFactory(),() => HttpContext.Current)
-    {
     }
 
     public void display<ReportModel>(ReportModel model)
