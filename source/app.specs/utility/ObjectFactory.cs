@@ -31,6 +31,7 @@ namespace app.specs.utility
     {
       public static ExpressionBuilder<T> to_target<T>()
       {
+        return new ExpressionBuilder<T>();
       }
     }
 
