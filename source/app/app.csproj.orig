@@ -84,17 +84,18 @@
     <Compile Include="tasks\startup\ConfigureTheFrontController.cs" />
     <Compile Include="tasks\startup\ConfiguringTheContainer.cs" />
     <Compile Include="tasks\startup\ConfigureTheServiceLayer.cs" />
+<<<<<<< HEAD
     <Compile Include="tasks\startup\ContainerRegistrationServices.cs" />
+=======
     <Compile Include="tasks\startup\IBuildStartupPipelines.cs" />
+>>>>>>> meaningfulbranchname
     <Compile Include="tasks\startup\IProvideContainerRegistrationServices.cs" />
     <Compile Include="tasks\startup\IRunAStartupStep.cs" />
     <Compile Include="tasks\startup\Start.cs" />
     <Compile Include="tasks\startup\Startup.cs" />
-    <Compile Include="tasks\startup\StartupStepBuilder.cs" />
     <Compile Include="utility\containers\basic\AutomaticDependencyFactory.cs" />
     <Compile Include="utility\containers\basic\DependencyContainer.cs" />
     <Compile Include="utility\containers\basic\DependencyCreationException.cs" />
-    <Compile Include="utility\containers\basic\DependencyFactoryNotRegisteredException.cs" />
     <Compile Include="utility\containers\basic\GreedyConstructorSelectionStrategy.cs" />
     <Compile Include="utility\containers\basic\ICreateADependency.cs" />
     <Compile Include="utility\containers\basic\ICreateDependencyFactories.cs" />
