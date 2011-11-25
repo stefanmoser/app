@@ -117,7 +117,9 @@
     <Compile Include="CalculatorSpecs.cs" />
     <Compile Include="CommandRegistrySpecs.cs" />
     <Compile Include="CommandExecutorSpecs.cs" />
+    <Compile Include="IncomingRequestSpecs.cs" />
     <Compile Include="PageFactorySpecs.cs" />
+    <Compile Include="RequestMatchBuilderSpecs.cs" />
     <Compile Include="StubSpecs.cs" />
     <Compile Include="WebResponseEngineSpecs.cs" />
     <Compile Include="FrontControllerSpecs.cs" />

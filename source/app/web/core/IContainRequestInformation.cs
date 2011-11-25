@@ -2,6 +2,7 @@
 {
   public interface IContainRequestInformation
   {
-    ViewModel map<ViewModel>();
+    InputModel map<InputModel>();
+    string request_name { get; }
   }
 }

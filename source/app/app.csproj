@@ -99,9 +99,11 @@
     <Compile Include="web\core\CommandRegistry.cs" />
     <Compile Include="web\core\aspnet\CurrentContextResolver.cs" />
     <Compile Include="web\core\FrontController.cs" />
+    <Compile Include="web\core\IBuildRequestMatchers.cs" />
     <Compile Include="web\core\IContainRequestInformation.cs" />
     <Compile Include="web\core\aspnet\ICreateAResponse.cs" />
     <Compile Include="web\core\IDisplayReportModels.cs" />
+    <Compile Include="web\core\IncomingRequest.cs" />
     <Compile Include="web\core\ISendAResponse.cs" />
     <Compile Include="web\core\ICreateRequests.cs" />
     <Compile Include="web\core\IFindCommands.cs" />
@@ -109,13 +111,19 @@
     <Compile Include="web\core\IImplementAUseCase .cs" />
     <Compile Include="web\core\IProcessOneRequest.cs" />
     <Compile Include="web\core\IProcessRequests.cs" />
-    <Compile Include="web\core\IMatchARequest.cs" />
+    <Compile Include="web\core\ContainsModel.cs" />
+    <Compile Include="web\core\MatchBuilderFactory.cs" />
     <Compile Include="web\core\RequestCommand.cs" />
     <Compile Include="web\core\aspnet\WebResponseEngine.cs" />
+    <Compile Include="web\core\RequestMatchBuilder.cs" />
+    <Compile Include="web\core\stubs\GetProductsInADepartment.cs" />
     <Compile Include="web\core\stubs\StubMissingCommand.cs" />
     <Compile Include="web\core\stubs\StubRequestFactory.cs" />
     <Compile Include="web\core\stubs\StubSetOfCommands.cs" />
     <Compile Include="web\core\stubs\TestStub.cs" />
+    <Compile Include="web\core\stubs\ViewDepartmentsInDepartmentRequest.cs" />
+    <Compile Include="web\core\stubs\ViewMainDepartmentsRequest.cs" />
+    <Compile Include="web\core\stubs\ViewProductsRequest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

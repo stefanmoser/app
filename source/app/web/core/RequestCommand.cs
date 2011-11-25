@@ -2,10 +2,10 @@
 {
   public class RequestCommand : IProcessOneRequest
   {
-    RequestMatch matcher;
+    ContainsTheModel matcher;
     IImplementAUseCase application_behaviour;
 
-    public RequestCommand(RequestMatch matcher, IImplementAUseCase application_behaviour)
+    public RequestCommand(ContainsTheModel matcher, IImplementAUseCase application_behaviour)
     {
       this.matcher = matcher;
       this.application_behaviour = application_behaviour;
