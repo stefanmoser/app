@@ -27,29 +27,18 @@ namespace app.tasks.startup
 
     static void wire_everything_up()
     {
-      dependencies.Add(typeof(IBuildRequestMatchers), new SimpleFactory(() => new RequestMatchBuilder()));
+      register<IBuildRequestMatchers>(() => new RequestMatchBuilder());
+      register<IFindPathsToViews>(Stub.with<StubPathRegistry>);
+      register<ICreateAResponse>(()=>new PageFactory(Container.fetch.an<IFindPathsToViews>(), BuildManager.CreateInstanceFromVirtualPath));
+      register<IDisplayReportModels>(() => new WebResponseEngine(Container.fetch.an<ICreateAResponse>(), () => HttpContext.Current));
+      register<IFindCommands>(() => new CommandRegistry(Stub.with<StubSetOfCommands>(), Stub.with<StubMissingCommand>()));
+      register<ICreateRequests>(Stub.with<StubRequestFactory>);
+      register<IProcessRequests>(() => new FrontController(Container.fetch.an<IFindCommands>()));
+    }
 
-
-      dependencies.Add(typeof(IFindPathsToViews), new SimpleFactory(Stub.with<StubPathRegistry>));
-
-      dependencies.Add(typeof(ICreateAResponse),
-                       new SimpleFactory(
-                         () =>
-                           new PageFactory(Container.fetch.an<IFindPathsToViews>(),
-                                           BuildManager.CreateInstanceFromVirtualPath)));
-
-      dependencies.Add(typeof(IDisplayReportModels),
-                       new SimpleFactory(
-                         () => new WebResponseEngine(Container.fetch.an<ICreateAResponse>(), () => HttpContext.Current)));
-
-      dependencies.Add(typeof(IFindCommands),
-                       new SimpleFactory(
-                         () => new CommandRegistry(Stub.with<StubSetOfCommands>(), Stub.with<StubMissingCommand>())));
-
-      dependencies.Add(typeof(ICreateRequests), new SimpleFactory(Stub.with<StubRequestFactory>));
-
-      var fc = new FrontController(Container.fetch.an<IFindCommands>());
-      dependencies.Add(typeof(IProcessRequests), new SimpleFactory(() => fc));
+    static void register<RegisteredType>(Func<object> factory_method)
+    {
+      dependencies.Add(typeof(RegisteredType), new SimpleFactory(factory_method));
     }
   }
 }

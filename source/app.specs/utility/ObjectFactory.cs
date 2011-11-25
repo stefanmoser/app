@@ -1,6 +1,9 @@
 ﻿using System;
 using System.IO;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Web;
+using developwithpassion.specifications.extensions;
 
 namespace app.specs.utility
 {
@@ -21,6 +24,21 @@ namespace app.specs.utility
       static HttpResponse create_response()
       {
         return new HttpResponse(new StringWriter());
+      }
+    }
+
+    public static class expressions
+    {
+      public static ExpressionBuilder<T> to_target<T>()
+      {
+      }
+    }
+
+    public class ExpressionBuilder<T>
+    {
+      public ConstructorInfo get_ctor(Expression<Func<T>>  ctor)
+      {
+        return ctor.Body.downcast_to<NewExpression>().Constructor;
       }
     }
   }
