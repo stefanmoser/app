@@ -60,7 +60,7 @@ namespace app.web.core
 
     public void process(IContainRequestInformation request)
     {
-      original.process();
+      //original.process();
     }
   }
 }

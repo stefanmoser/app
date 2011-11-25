@@ -21,8 +21,8 @@ namespace app.specs
         spec.change(() => Container.facade_resolution).to(resolution);
       };
 
-      Because b = () =>
-        result = Container.fetch;
+    	Because b = () =>
+    		result = Container.fetch;
 
       It should_return_the_container_facade_configured_at_startup = () =>
         result.ShouldEqual(the_facade);
