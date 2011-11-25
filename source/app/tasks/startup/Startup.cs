@@ -27,31 +27,19 @@ namespace app.tasks.startup
 
     static void wire_everything_up()
     {
-      dependencies.Add(typeof(IBuildRequestMatchers), new SimpleFactory(() => new RequestMatchBuilder()));
+      register_a_dependency<IBuildRequestMatchers>(() => new RequestMatchBuilder());
+      register_a_dependency<MatchBuilderFactory>(() => (MatchBuilderFactory) Container.fetch.an<IBuildRequestMatchers>);
+      register_a_dependency<IFindPathsToViews>(Stub.with<StubPathRegistry>);
+      register_a_dependency<ICreateAResponse>(()=>new PageFactory(Container.fetch.an<IFindPathsToViews>(), BuildManager.CreateInstanceFromVirtualPath));
+      register_a_dependency<IDisplayReportModels>(() => new WebResponseEngine(Container.fetch.an<ICreateAResponse>(), () => HttpContext.Current));
+      register_a_dependency<IFindCommands>(() => new CommandRegistry(Stub.with<StubSetOfCommands>(), Stub.with<StubMissingCommand>()));
+      register_a_dependency<ICreateRequests>(Stub.with<StubRequestFactory>);
+      register_a_dependency<IProcessRequests>(() => new FrontController(Container.fetch.an<IFindCommands>()));
+    }
 
-      dependencies.Add(typeof(MatchBuilderFactory),
-                       new SimpleFactory(() => (MatchBuilderFactory) Container.fetch.an<IBuildRequestMatchers>));
-
-      dependencies.Add(typeof(IFindPathsToViews), new SimpleFactory(Stub.with<StubPathRegistry>));
-
-      dependencies.Add(typeof(ICreateAResponse),
-                       new SimpleFactory(
-                         () =>
-                           new PageFactory(Container.fetch.an<IFindPathsToViews>(),
-                                           BuildManager.CreateInstanceFromVirtualPath)));
-
-      dependencies.Add(typeof(IDisplayReportModels),
-                       new SimpleFactory(
-                         () => new WebResponseEngine(Container.fetch.an<ICreateAResponse>(), () => HttpContext.Current)));
-
-      dependencies.Add(typeof(IFindCommands),
-                       new SimpleFactory(
-                         () => new CommandRegistry(Stub.with<StubSetOfCommands>(), Stub.with<StubMissingCommand>())));
-
-      dependencies.Add(typeof(ICreateRequests), new SimpleFactory(Stub.with<StubRequestFactory>));
-
-      var fc = new FrontController(Container.fetch.an<IFindCommands>());
-      dependencies.Add(typeof(IProcessRequests), new SimpleFactory(() => fc));
+    static void register_a_dependency<RegisteredType>(Func<object> factory_method)
+    {
+      dependencies.Add(typeof(RegisteredType), new SimpleFactory(factory_method));
     }
   }
 }
