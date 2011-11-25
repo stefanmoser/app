@@ -84,6 +84,7 @@
     <Compile Include="utility\containers\basic\AutomaticDependencyFactory.cs" />
     <Compile Include="utility\containers\basic\DependencyContainer.cs" />
     <Compile Include="utility\containers\basic\DependencyCreationException.cs" />
+    <Compile Include="utility\containers\basic\GreedyConstructorSelectionStrategy.cs" />
     <Compile Include="utility\containers\basic\ICreateADependency.cs" />
     <Compile Include="utility\containers\basic\IFindFactoriesForDependencies.cs" />
     <Compile Include="utility\containers\basic\IPickTheConstructorForAType.cs" />
