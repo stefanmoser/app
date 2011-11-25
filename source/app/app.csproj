@@ -80,6 +80,8 @@
     <Compile Include="Calculator.cs" />
     <Compile Include="MessageGenerator.cs" />
     <Compile Include="Stub.cs" />
+    <Compile Include="utility\containers\basic\DependencyContainer.cs" />
+    <Compile Include="utility\containers\basic\IMapDependencies.cs" />
     <Compile Include="utility\containers\Container.cs" />
     <Compile Include="utility\containers\ContainerFacadeResolution.cs" />
     <Compile Include="utility\containers\IFetchDependencies .cs" />

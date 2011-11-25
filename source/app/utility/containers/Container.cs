@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace app.utility.containers
 {
   public class Container
@@ -10,7 +11,7 @@ namespace app.utility.containers
 
     public static IFetchDependencies fetch
     {
-		get { return facade_resolution(); }
+      get { return facade_resolution(); }
     }
   }
 }

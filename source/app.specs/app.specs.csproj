@@ -118,6 +118,7 @@
     <Compile Include="CommandRegistrySpecs.cs" />
     <Compile Include="CommandExecutorSpecs.cs" />
     <Compile Include="ContainerSpecs.cs" />
+    <Compile Include="DependencyContainerSpecs.cs" />
     <Compile Include="IncomingRequestSpecs.cs" />
     <Compile Include="PageFactorySpecs.cs" />
     <Compile Include="RequestMatchBuilderSpecs.cs" />

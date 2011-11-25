@@ -1,6 +1,8 @@
 ﻿ using Machine.Specifications;
+ using app.utility.containers;
  using app.web.core;
  using developwithpassion.specifications.rhinomocks;
+ using developwithpassion.specifications.extensions;
 
 namespace app.specs
 {  
@@ -19,8 +21,12 @@ namespace app.specs
       {
         the_builder = fake.an<IBuildRequestMatchers>();
         MatchBuilderFactory factory = () => the_builder;
+        the_facade = fake.an<IFetchDependencies>();
+        ContainerFacadeResolution resolution = () => the_facade;
 
-        spec.change(() => IncomingRequest.builder_factory).to(factory);
+        spec.change(() => Container.facade_resolution).to(resolution);
+
+        the_facade.setup( x => x.an<MatchBuilderFactory>()).Return(factory);
       };
 
       Because b = () =>
@@ -31,6 +37,7 @@ namespace app.specs
 
       static IBuildRequestMatchers result;
       static IBuildRequestMatchers the_builder;
+      static IFetchDependencies the_facade;
     }
   }
 }
