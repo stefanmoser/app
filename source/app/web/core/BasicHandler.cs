@@ -9,8 +9,7 @@ namespace app.web.core
     ICreateRequests request_factory;
 
     public BasicHandler()
-      : this(
-        Container.fetch.an<IProcessRequests>(), Container.fetch.an<ICreateRequests>())
+      : this(Container.fetch.an<IProcessRequests>(), Container.fetch.an<ICreateRequests>())
     {
     }
 
