@@ -1,26 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace app.utility.containers.basic
 {
   public class DependencyContainer : IFetchDependencies
   {
-	IFindFactoriesForDependencies dependencies;
+    IDictionary<Type,ICreateADependency> dependencies;
 
-	public DependencyContainer(IFindFactoriesForDependencies dependencies)
-	{
-	  this.dependencies = dependencies;
-	}
+    public DependencyContainer(IDictionary<Type,ICreateADependency> dependencies)
+    {
+      this.dependencies = dependencies;
+    }
 
-	public Dependency an<Dependency>()
-	{
-		try
-		{
-			return (Dependency)dependencies.get_the_factory_that_can_create(typeof(Dependency)).create();
-		}
-		catch (Exception e)
-		{
-			throw new DependencyCreationException("Cannot create type", typeof(Dependency), e);
-		}
-	}
+    public Dependency an<Dependency>()
+    {
+      try
+      {
+        return (Dependency) dependencies[typeof(Dependency)].create();
+      }
+      catch (Exception e)
+      {
+        throw new DependencyCreationException(typeof(Dependency), e);
+      }
+    }
   }
 }

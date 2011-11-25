@@ -122,6 +122,8 @@
     <Compile Include="IncomingRequestSpecs.cs" />
     <Compile Include="PageFactorySpecs.cs" />
     <Compile Include="RequestMatchBuilderSpecs.cs" />
+    <Compile Include="SimpleFactorySpecs.cs" />
+    <Compile Include="StartupSpecs.cs" />
     <Compile Include="StubSpecs.cs" />
     <Compile Include="WebResponseEngineSpecs.cs" />
     <Compile Include="FrontControllerSpecs.cs" />

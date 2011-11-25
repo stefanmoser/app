@@ -80,10 +80,12 @@
     <Compile Include="Calculator.cs" />
     <Compile Include="MessageGenerator.cs" />
     <Compile Include="Stub.cs" />
+    <Compile Include="tasks\startup\Startup.cs" />
     <Compile Include="utility\containers\basic\DependencyContainer.cs" />
     <Compile Include="utility\containers\basic\DependencyCreationException.cs" />
     <Compile Include="utility\containers\basic\ICreateADependency.cs" />
     <Compile Include="utility\containers\basic\IFindFactoriesForDependencies.cs" />
+    <Compile Include="utility\containers\basic\SimpleFactory.cs" />
     <Compile Include="utility\containers\Container.cs" />
     <Compile Include="utility\containers\ContainerFacadeResolution.cs" />
     <Compile Include="utility\containers\IFetchDependencies .cs" />

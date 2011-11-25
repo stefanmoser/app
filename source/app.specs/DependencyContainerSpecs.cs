@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Machine.Specifications;
 using app.utility.containers;
 using app.utility.containers.basic;
@@ -23,8 +24,9 @@ namespace app.specs
         {
           the_item = new ThatsWhatSheSaid();
           factory = fake.an<ICreateADependency>();
-          dependencies = depends.on<IFindFactoriesForDependencies>();
-          dependencies.setup(x => x.get_the_factory_that_can_create(typeof(ThatsWhatSheSaid))).Return(factory);
+          dependencies = new Dictionary<Type, ICreateADependency>();
+          dependencies.Add(typeof(ThatsWhatSheSaid),factory);
+          depends.on(dependencies);
 
           factory.setup(x => x.create()).Return(the_item);
         };
@@ -51,8 +53,9 @@ namespace app.specs
           the_item = new ThatsWhatSheSaid();
           factory = fake.an<ICreateADependency>();
           the_inner_exception = new Exception();
-          dependencies = depends.on<IFindFactoriesForDependencies>();
-          dependencies.setup(x => x.get_the_factory_that_can_create(typeof(ThatsWhatSheSaid))).Return(factory);
+          dependencies = new Dictionary<Type, ICreateADependency>();
+          dependencies.Add(typeof(ThatsWhatSheSaid),factory);
+          depends.on(dependencies);
 
           factory.setup(x => x.create()).Throw(the_inner_exception);
         };
@@ -71,7 +74,7 @@ namespace app.specs
         static Exception the_inner_exception;
 
       }
-      static IFindFactoriesForDependencies dependencies;
+      static IDictionary<Type, ICreateADependency> dependencies;
       static ICreateADependency factory;
       static ThatsWhatSheSaid result;
       static ThatsWhatSheSaid the_item;
