@@ -17,7 +17,14 @@ namespace app.tasks.startup
 
     public ICreateADependency get_the_factory_that_can_create(Type dependency_type)
     {
-      throw new NotImplementedException();
+      ensure_there_is_a_factory_registered_for(dependency_type);
+      return factories[dependency_type];
+    }
+  
+    void ensure_there_is_a_factory_registered_for(Type type){
+      if (factories.ContainsKey(type)) return;
+
+      throw new DependencyFactoryNotRegisteredException(type);
     }
 
     public void register<Implementation>()
