@@ -80,6 +80,7 @@
     <Compile Include="Calculator.cs" />
     <Compile Include="MessageGenerator.cs" />
     <Compile Include="Stub.cs" />
+    <Compile Include="tasks\startup\ConfigureQueries.cs" />
     <Compile Include="tasks\startup\ConfigureTheFrontController.cs" />
     <Compile Include="tasks\startup\ConfiguringTheContainer.cs" />
     <Compile Include="tasks\startup\ConfigureTheServiceLayer.cs" />

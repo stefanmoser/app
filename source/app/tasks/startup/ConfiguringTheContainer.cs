@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using app.utility.containers;
+﻿using app.utility.containers;
 using app.utility.containers.basic;
 
 namespace app.tasks.startup
@@ -16,8 +14,7 @@ namespace app.tasks.startup
 
     public void run()
     {
-      var dependencies = new Dictionary<Type, ICreateADependency>();
-      var container = new DependencyContainer(dependencies);
+      var container = new DependencyContainer(registration);
       ContainerFacadeResolution facade_resolution = () => container;
       Container.facade_resolution = facade_resolution;
       registration.register_instance(container);
