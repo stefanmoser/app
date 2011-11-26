@@ -86,6 +86,7 @@
     <Compile Include="tasks\startup\ConfigureTheServiceLayer.cs" />
     <Compile Include="tasks\startup\ContainerRegistrationServices.cs" />
     <Compile Include="tasks\startup\IBuildStartupPipelines.cs" />
+    <Compile Include="tasks\startup\ICreateStartupSteps.cs" />
     <Compile Include="tasks\startup\IProvideContainerRegistrationServices.cs" />
     <Compile Include="tasks\startup\IRunAStartupStep.cs" />
     <Compile Include="tasks\startup\Start.cs" />
