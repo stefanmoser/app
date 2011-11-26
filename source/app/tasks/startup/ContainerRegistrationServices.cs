@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using app.utility.containers;
 using app.utility.containers.basic;
 
 namespace app.tasks.startup
@@ -34,7 +35,9 @@ namespace app.tasks.startup
 
     public void register<Contract, Implementation>() where Implementation : Contract
     {
-      add_factory<Contract>(factory_provider.create_factory_to_automatically_create(typeof(Implementation)));
+      if (factories.ContainsKey(typeof (Contract))) throw new TypeAlreadyRegisteredException(typeof (Contract));
+
+      add_factory<Contract>(factory_provider.create_factory_to_automatically_create(typeof (Implementation)));
     }
 
     void add_factory<Contract>(ICreateADependency factory)

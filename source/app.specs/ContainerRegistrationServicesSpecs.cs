@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Machine.Specifications;
 using app.tasks.startup;
+using app.utility.containers;
 using app.utility.containers.basic;
 using developwithpassion.specifications.extensions;
 using developwithpassion.specifications.rhinomocks;
@@ -97,7 +98,18 @@ namespace app.specs
 
       public class that_is_already_registered:concern_for_registration
       {
-        
+        Establish context = () =>
+                              {
+                                IDictionary<Type, ICreateADependency> dictionary = new Dictionary<Type, ICreateADependency>();
+                                dictionary.Add(typeof(OurType), fake.an<ICreateADependency>());
+                                depends.on(dictionary);
+                              };
+          
+        Because of = () =>
+          spec.catch_exception(() => sut.register<OurType>());
+
+        It should_thrown_a_type_already_registered_exception = () =>
+          spec.exception_thrown.ShouldBeOfType<TypeAlreadyRegisteredException>();
       }
 
       public class by_instance

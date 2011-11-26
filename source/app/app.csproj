@@ -105,6 +105,7 @@
     <Compile Include="utility\containers\Container.cs" />
     <Compile Include="utility\containers\ContainerFacadeResolution.cs" />
     <Compile Include="utility\containers\IFetchDependencies .cs" />
+    <Compile Include="utility\containers\TypeAlreadyRegisteredException.cs" />
     <Compile Include="utility\IEncapsulateFunctionality.cs" />
     <Compile Include="web\application\IFindInformationInTheStore.cs" />
     <Compile Include="web\application\stubs\StubFindInformationInTheStore.cs" />
