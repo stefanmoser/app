@@ -1,7 +1,9 @@
 ﻿using Machine.Specifications;
 using app.tasks.startup;
 using app.utility.containers;
+using app.web.core;
 using developwithpassion.specifications.rhinomocks;
+using developwithpassion.specifications.extensions;
 
 namespace app.specs
 {
@@ -20,6 +22,7 @@ namespace app.specs
       It should_have_configured_the_application_to_run = () =>
       {
         Container.fetch.an<IFetchDependencies>().ShouldNotBeNull();
+        Container.fetch.an<IProcessRequests>().ShouldBeAn<FrontController>();
       };
     }
   }

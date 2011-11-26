@@ -4,7 +4,11 @@
   {
     public static void run()
     {
-      Start.by_only_running<ConfiguringTheContainer>();
+      Start.by<ConfiguringTheContainer>()
+        .followed_by<ConfigureTheServiceLayer>()
+        .followed_by<ConfigureTheFrontController>()
+        .finish_by<ConfigureQueries>();
+
     }
   }
 }
