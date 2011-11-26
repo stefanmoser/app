@@ -95,6 +95,11 @@ namespace app.specs
         static ICreateDependencyFactories factory_provider;
       }
 
+      public class that_is_already_registered:concern_for_registration
+      {
+        
+      }
+
       public class by_instance
       {
         Establish c = () =>

@@ -12,11 +12,13 @@ namespace app.tasks.startup
 
   class CreateStartupSteps : ICreateStartupSteps
   {
+    IDictionary<Type,ICreateADependency> items = new Dictionary<Type, ICreateADependency>();
 
     public IRunAStartupStep create_step_from(Type step)
     {
       ICreateDependencyFactories factory = new FactoriesProvider(new LazyContainer());
-      var container_registration_services = new ContainerRegistrationServices(factory, new Dictionary<Type, ICreateADependency>());
+      var dependencies = new ContainerRegistrationServices(factory, items);
+      var container_registration_services = dependencies;
 
       return (IRunAStartupStep)Activator.CreateInstance(step,
                                       container_registration_services);
